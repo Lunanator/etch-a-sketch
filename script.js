@@ -24,6 +24,12 @@ randomColorButton.addEventListener("click", () => {
     console.log(colorMode);
 });
 
+const darkerButton = document.querySelector('#b4');
+darkerButton.addEventListener("click", () => {
+    colorMode = 3;
+    console.log(colorMode);
+});
+
 function createGrid(number) {
     const elements = document.getElementsByClassName('pixel');
     while(elements.length > 0){
@@ -54,9 +60,35 @@ function createGrid(number) {
                 console.log(pixel.style.backgroundColor);
             }
             setColor();
+            } else if (colorMode === 3) {
+                if (pixel.style.backgroundColor === 'white') {
+                    colorDarker("rgb(255, 255, 255)");
+                    pixel.style.backgroundColor = newColor;
+                }
+                else {
+                    colorDarker(`${pixel.style.backgroundColor}`);
+                    pixel.style.backgroundColor = newColor;
+                }
             }
         });
         container.append(pixel);
     }
+}
+
+
+let rgb = [];
+
+const colorDarker = (rgbInput) => {
+    rgb = rgbInput.match(/\d+/g);
+    console.log(rgb);
+    r = rgb[0];
+    g = rgb[1];
+    b = rgb[2];
+    console.log(g);
+    rNew = r - 25.5;
+    gNew = g - 25.5;
+    bNew = b - 25.5;
+    newColor = `rgb(${rNew},${gNew},${bNew})`;
+    console.log(newColor);
 }
 
